@@ -1,5 +1,6 @@
 plugins {
     id 'java-library'
+    id 'application'
 }
 
 java {
@@ -13,4 +14,8 @@ repositories {
 
 dependencies {
     implementation 'com.acmerobotics.roadrunner:MeepMeep:0.1.6'
+}
+
+application {
+    mainClass = 'org.firstinspires.ftc.trajectories.meepmeeptesting.MeepMeepTesting'
 }
