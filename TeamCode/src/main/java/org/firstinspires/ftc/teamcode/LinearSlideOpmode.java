@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -11,17 +12,17 @@ public class LinearSlideOpmode extends OpMode {
 
 
     private Motor slideMotor;
-    private GamepadEx gamepad;
+    private GamepadEx gamePad;
 
     @Override
     public void init() {
         slideMotor = new Motor(hardwareMap, "slide_motor");
-        gamepad = new GamepadEx(gamepad1);
+        gamePad = new GamepadEx(gamepad1);
     }
 
     @Override
     public void loop() {
-        slideMotor.set(gamepad.getLeftY());
+        slideMotor.set(gamePad.getLeftY());
 
 
     }
