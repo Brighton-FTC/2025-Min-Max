@@ -10,19 +10,18 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 public class LinearSlideOpmode extends OpMode {
 
-
-    private Motor slideMotor;
     private GamepadEx gamePad;
+    private LinearSlideComponent linearSlide;
 
     @Override
     public void init() {
-        slideMotor = new Motor(hardwareMap, "slide_motor");
+        linearSlide = new LinearSlideComponent(hardwareMap, "linear_slide_motor");
         gamePad = new GamepadEx(gamepad1);
     }
 
     @Override
     public void loop() {
-        slideMotor.set(gamePad.getLeftY());
+        linearSlide.run(gamePad.getLeftY());
 
 
     }
