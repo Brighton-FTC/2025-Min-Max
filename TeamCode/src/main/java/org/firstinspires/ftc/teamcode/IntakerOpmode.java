@@ -11,35 +11,30 @@ import org.firstinspires.ftc.teamcode.util.inputs.PSButtons;
 @TeleOp
 
 public class IntakerOpmode extends OpMode {
-    private Motor turnMotor;
+    private IntakeComponent intake;
     private GamepadEx gamePad;
 
     @Override
     public void init() {
-        turnMotor = new Motor(hardwareMap, "turn_motor");
         gamePad = new GamepadEx(gamepad2);
-
+        intake = new IntakeComponent(hardwareMap, "intake_motor");
     }
 
     @Override
     public void loop() {
-        turnMotor.stopMotor();
-
         gamePad.readButtons();
+
         if (gamePad.wasJustPressed(PSButtons.CROSS)) {
-            turnMotor.set(1);
+            intake.forward();
         }
+
         if (gamePad.wasJustPressed(PSButtons.CIRCLE)) {
-            turnMotor.set(-1);
-
-
+            intake.backward();
         }
 
-        if (gamePad.wasJustReleased(PSButtons.SQUARE)) {
-            turnMotor.set(0);
+        if (gamePad.wasJustPressed(PSButtons.TRIANGLE)){
+            intake.still();
         }
-
-
     }
 
 }
