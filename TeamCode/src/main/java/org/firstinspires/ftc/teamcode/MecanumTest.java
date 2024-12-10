@@ -24,8 +24,6 @@ public class MecanumTest extends OpMode {
                 new Motor(hardwareMap, "back_left_drive"),
                 new Motor(hardwareMap, "back_right_drive")
         };
-        motors[0].setInverted(true);
-        motors[2].setInverted(true);
         motors[3].setInverted(true);
         drive = new MecanumDrive(motors[0], motors[1], motors[2], motors[3]);
 
