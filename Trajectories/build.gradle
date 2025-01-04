@@ -8,14 +8,14 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+application {
+    mainClass = 'com.example.trajectories.MeepMeepTesting'
+}
+
 repositories {
     maven { url = 'https://maven.brott.dev/' }
 }
 
 dependencies {
     implementation 'com.acmerobotics.roadrunner:MeepMeep:0.1.6'
-}
-
-application {
-    mainClass = 'org.firstinspires.ftc.trajectories.meepmeeptesting.MeepMeepTesting'
 }
