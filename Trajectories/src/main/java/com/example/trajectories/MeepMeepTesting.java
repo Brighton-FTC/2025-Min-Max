@@ -33,20 +33,20 @@ public class MeepMeepTesting {
 
         Bot1.runAction(Bot1.getDrive().actionBuilder(new Pose2d(0, 56, 0))
                 .splineTo(new Vector2d(50,60), 0)
-                .splineToSplineHeading(new Pose2d(0,30,-90), -90)
+                .splineToSplineHeading(new Pose2d(22,0,-90), -90)
                         .build());
 
         Bot2.runAction(Bot2.getDrive().actionBuilder(new Pose2d(28, 56, 0))
                 .splineTo(new Vector2d(50,60), 0)
-                .splineToSplineHeading(new Pose2d(0,30,-90), -90)
+                .splineToSplineHeading(new Pose2d(22,0,-90), -90)
                 .build());
         Bot3.runAction(Bot3.getDrive().actionBuilder(new Pose2d(-34, -52, 0))
                 .splineTo(new Vector2d(-52,-52), 0)
-               .splineToSplineHeading(new Pose2d(0,-32,-90), 90)
+               .splineToSplineHeading(new Pose2d(-22,0,-90), 90)
                 .build());
         Bot4.runAction(Bot4.getDrive().actionBuilder(new Pose2d(5, -52, 0))
                 .splineTo(new Vector2d(-52,-52), 0)
-                .splineToSplineHeading(new Pose2d(0,-32,-90), 90)
+                .splineToSplineHeading(new Pose2d(-22,0,-90), 90)
                 .build());
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_JUICE_DARK)
