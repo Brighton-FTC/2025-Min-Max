@@ -14,6 +14,7 @@ public class OuttakeTester extends OpMode {
     public void init() {
         outtake = new OuttakeComponent(hardwareMap, "outtake_servo");
         gamepad = new GamepadEx(gamepad1);
+        outtake.reset();
     }
 
     @Override
