@@ -22,13 +22,13 @@ public class OuttakeTester extends OpMode {
     @Override
     public void loop() {
         // Check if button A is pressed to lift
-        if (gamepad.getButton(PSButtons.SQUARE)) {
-            outtake.lift();
+        if (gamepad.getButton(PSButtons.SQUARE) && !outtake.servoComponentActivated) {
+            outtake.lower();
             telemetry.addData("Outtake Status", "Lifted");
         }
 
         // Check if button B is pressed to reset
-        if (gamepad.getButton(PSButtons.CIRCLE)) {
+        if (gamepad.getButton(PSButtons.SQUARE) && outtake.servoComponentActivated) {
             outtake.reset();
             telemetry.addData("Outtake Status", "Reset");
         }
