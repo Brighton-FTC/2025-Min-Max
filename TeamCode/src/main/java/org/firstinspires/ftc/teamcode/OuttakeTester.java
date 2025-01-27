@@ -5,6 +5,8 @@ import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
+import org.firstinspires.ftc.teamcode.util.inputs.PSButtons;
+
 @TeleOp
 public class OuttakeTester extends OpMode {
     private OuttakeComponent outtake; // Manages the outtake mechanism
@@ -20,13 +22,13 @@ public class OuttakeTester extends OpMode {
     @Override
     public void loop() {
         // Check if button A is pressed to lift
-        if (gamepad.getButton(GamepadKeys.Button.A)) {
+        if (gamepad.getButton(PSButtons.SQUARE)) {
             outtake.lift();
             telemetry.addData("Outtake Status", "Lifted");
         }
 
         // Check if button B is pressed to reset
-        if (gamepad.getButton(GamepadKeys.Button.B)) {
+        if (gamepad.getButton(PSButtons.CIRCLE)) {
             outtake.reset();
             telemetry.addData("Outtake Status", "Reset");
         }
