@@ -2,11 +2,19 @@ package org.firstinspires.ftc.teamcode;
 
 import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
+import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 @TeleOp
 public class OuttakeComponent {
+
+    private Motor motor;
+
+    public LinearSlideComponent(HardwareMap hardwareMap, String motorid) {
+        motor = new Motor(hardwareMap, motorid);
+
+    }
     private final ServoEx servo;
 
     private boolean componentActivated = false; // Lowercased to match Java conventions
@@ -28,6 +36,15 @@ public class OuttakeComponent {
             componentActivated = false; // Update state to deactivated
         }
     }
+
+    public void forward() {
+        motor.set(1);
+    }
+
+    public void backward() {
+        motor.set(-1);
+    }
+
 
     public boolean isComponentActivated() {
         return componentActivated; // Allow status checks

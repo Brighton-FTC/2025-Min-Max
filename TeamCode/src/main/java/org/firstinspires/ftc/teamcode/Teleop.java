@@ -8,8 +8,12 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.teamcode.util.inputs.PSButtons;
+
 @TeleOp
 public class Teleop extends OpMode {
+
+    private OuttakeComponent outtake;
     private MecanumDrive drive;
     private GamepadEx gamepad;
     private IMU imu;
@@ -17,6 +21,7 @@ public class Teleop extends OpMode {
     @Override
     public void init() {
         gamepad = new GamepadEx(gamepad1);
+        outtake = new OuttakeComponent(hardwareMap, "outtake_servo");
 
         Motor[] motors = {
                 new Motor(hardwareMap, "front_left_drive"),
@@ -41,5 +46,8 @@ public class Teleop extends OpMode {
     @Override
     public void loop() {
         drive.driveFieldCentric(gamepad.getLeftX(), gamepad.getLeftY(), gamepad.getRightX(), imu.getRobotYawPitchRollAngles().getYaw(), true);
+        if (gamepad.wasJustPressed(PSButtons.SQUARE)) outtake.backward();
     }
+
 }
+
