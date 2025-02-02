@@ -91,4 +91,26 @@ public abstract class Autonomous extends LinearOpMode {
 
         }
     }
+
+    //Linear slide usage
+    @TeleOp
+    public class LinearSlideOpmode extends OpMode {
+
+        private GamepadEx gamePad;
+        private LinearSlideComponent linearSlide;
+
+        @Override
+        public void init() {
+            linearSlide = new LinearSlideComponent(hardwareMap, "linear_slide_motor");
+            gamePad = new GamepadEx(gamepad1);
+        }
+
+        @Override
+        public void loop() {
+            linearSlide.run(gamePad.getLeftY());
+        }
+    }
+
+
+
 }
