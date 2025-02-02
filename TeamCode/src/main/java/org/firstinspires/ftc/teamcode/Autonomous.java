@@ -1,6 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
+import com.acmerobotics.roadrunner.Vector2d;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.ServoEx;
@@ -10,10 +13,12 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.teamcode.util.roadrunner.MecanumDrive;
+
 
 @Config
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "BLUE_TEST_AUTO_PIXEL", group = "Autonomous")
-public abstract class Autonomous extends LinearOpMode {
+public class Autonomous extends LinearOpMode {
 
     //Define Outtake Component
     @TeleOp
@@ -111,6 +116,22 @@ public abstract class Autonomous extends LinearOpMode {
         }
     }
 
+    @Override
+    public void runOpMode(){
+
+        //initialise Pose
+        Pose2d initialPose = new Pose2d(0, 56, 0);
+        MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
 
+        //outtake instance
+        OuttakeComponent outtake = new OuttakeComponent(hardwareMap, "outtake_servo");
+
+        //slide instance
+        LinearSlideComponent linearSlide = new LinearSlideComponent(hardwareMap, "linear_slide_motor");
+
+        TrajectoryActionBuilder tab1 = drive.actionBuilder(initialPose)
+                .splineTo(new Vector2d(50,60), 0)
+                .splineToSplineHeading(new Pose2d(22,0,-90), -90);
+    }
 }
