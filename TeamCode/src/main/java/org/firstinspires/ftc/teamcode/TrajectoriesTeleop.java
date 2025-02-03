@@ -31,11 +31,11 @@ public class TrajectoriesTeleop extends LinearOpMode {
             gamepad.readButtons();
             if (gamepad.wasJustPressed(PSButtons.CIRCLE) && isAtCenter) {
                 Actions.runBlocking(centerToBasket);
-                isAtCenter = !isAtCenter;
+                isAtCenter = false;
             }
-            if(gamepad.wasJustPressed(PSButtons.CIRCLE) && isAtCenter == false){
+            if(gamepad.wasJustPressed(PSButtons.CIRCLE) && !isAtCenter){
                 Actions .runBlocking(basketToCenter);
-                isAtCenter = !isAtCenter;
+                isAtCenter = true;
             }
             sleep(20);
         }
