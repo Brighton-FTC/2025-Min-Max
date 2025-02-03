@@ -19,6 +19,7 @@ import org.firstinspires.ftc.teamcode.util.roadrunner.MecanumDrive;
 @Config
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "BLUE_TEST_AUTO_PIXEL", group = "Autonomous")
 public class Autonomous extends LinearOpMode {
+    protected Pose2d startpose;
 
     //Define Outtake Component
     @TeleOp
@@ -82,7 +83,6 @@ public class Autonomous extends LinearOpMode {
         }
     }
 
-
     //Define Linear Slide Component.
     public class LinearSlideComponent {
         private Motor slideMotor;
@@ -96,7 +96,6 @@ public class Autonomous extends LinearOpMode {
 
         }
     }
-
     //Linear slide usage
     @TeleOp
     public class LinearSlideOpmode extends OpMode {
@@ -119,19 +118,6 @@ public class Autonomous extends LinearOpMode {
     @Override
     public void runOpMode(){
 
-        //initialise Pose
-        Pose2d initialPose = new Pose2d(0, 56, 0);
-        MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
-
-        //outtake instance
-        OuttakeComponent outtake = new OuttakeComponent(hardwareMap, "outtake_servo");
-
-        //slide instance
-        LinearSlideComponent linearSlide = new LinearSlideComponent(hardwareMap, "linear_slide_motor");
-
-        TrajectoryActionBuilder tab1 = drive.actionBuilder(initialPose)
-                .splineTo(new Vector2d(50,60), 0)
-                .splineToSplineHeading(new Pose2d(22,0,-90), -90);
     }
 }
