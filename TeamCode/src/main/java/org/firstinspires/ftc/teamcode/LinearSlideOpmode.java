@@ -27,9 +27,13 @@ public class LinearSlideOpmode extends OpMode {
         linearSlide.run(gamePad.getLeftY());
         gamePad.readButtons();
 
-        if (gamePad.wasJustPressed(PSButtons.CROSS)) linearSlide.forward();
+        if (gamePad.wasJustPressed(PSButtons.CROSS)){
+            linearSlide.forward();
+        }
 
-        if (gamePad.wasJustPressed(PSButtons.CIRCLE)) linearSlide.backward();
+        if (gamePad.wasJustPressed(PSButtons.CIRCLE)){
+            linearSlide.backward();
+        }
     }
 
 }

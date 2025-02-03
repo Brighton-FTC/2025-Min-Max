@@ -14,6 +14,8 @@ public class IntakerOpmode extends OpMode {
     private IntakeComponent intake;
     private GamepadEx gamePad;
 
+    private IntakeComponent intake;
+
     @Override
     public void init() {
         gamePad = new GamepadEx(gamepad2);

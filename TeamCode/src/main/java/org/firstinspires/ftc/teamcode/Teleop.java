@@ -17,6 +17,7 @@ public class Teleop extends OpMode {
     private MecanumDrive drive;
     private GamepadEx gamepad;
     private IMU imu;
+    private OuttakeComponent outtake;
 
     @Override
     public void init() {
@@ -41,13 +42,18 @@ public class Teleop extends OpMode {
         ));
 
         imu.resetYaw();
+
+        outtake = new OuttakeComponent(hardwareMap, "outtake_servo");
     }
 
     @Override
     public void loop() {
+        gamepad.readButtons();
+
         drive.driveFieldCentric(gamepad.getLeftX(), gamepad.getLeftY(), gamepad.getRightX(), imu.getRobotYawPitchRollAngles().getYaw(), true);
-        if (gamepad.wasJustPressed(PSButtons.SQUARE)) outtake.backward();
+        if (gamepad.wasJustPressed(PSButtons.SQUARE)){
+            outtake.backward();
+        }
     }
 
 }
-
