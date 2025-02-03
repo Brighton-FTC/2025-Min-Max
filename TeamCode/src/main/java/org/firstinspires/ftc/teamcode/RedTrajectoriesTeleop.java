@@ -2,17 +2,17 @@ package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.Trajectory;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.util.inputs.PSButtons;
 import org.firstinspires.ftc.teamcode.util.roadrunner.MecanumDrive;
 
-public class TrajectoriesTeleop extends LinearOpMode {
-    protected Pose2d centerpose = new Pose2d(0, 25, 0);
-    protected Pose2d basketpose = new Pose2d(56, 56, 0);
+@TeleOp
+public class RedTrajectoriesTeleop extends TrajectoriesTeleop {
+    protected Pose2d centerpose = new Pose2d(0, -25, 0);
+    protected Pose2d basketpose = new Pose2d(-56, -56, 0);
 
     @Override
     public void runOpMode() throws InterruptedException {
