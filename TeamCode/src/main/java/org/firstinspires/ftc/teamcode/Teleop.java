@@ -17,7 +17,6 @@ public class Teleop extends OpMode {
     private MecanumDrive drive;
     private GamepadEx gamepad;
     private IMU imu;
-    private OuttakeComponent outtake;
 
     @Override
     public void init() {
