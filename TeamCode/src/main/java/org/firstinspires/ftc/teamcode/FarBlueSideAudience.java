@@ -9,15 +9,8 @@ import org.firstinspires.ftc.teamcode.util.roadrunner.MecanumDrive;
 public class FarBlueSideAudience extends Autonomous{
 
     //initialise Pose
-    protected Pose2d initialPose = new Pose2d(0, 56, 0);
+    protected Pose2d FarBlueSidePose = new Pose2d(0, 56, 0);
     MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
-
-
-    //outtake instance
-    Autonomous.OuttakeComponent outtake = new Autonomous.OuttakeComponent(hardwareMap, "outtake_servo");
-
-    //slide instance
-    Autonomous.LinearSlideComponent linearSlide = new Autonomous.LinearSlideComponent(hardwareMap, "linear_slide_motor");
 
     TrajectoryActionBuilder tab1 = drive.actionBuilder(initialPose)
             .splineTo(new Vector2d(50,60), 0)
