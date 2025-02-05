@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
@@ -21,10 +22,10 @@ import org.firstinspires.ftc.teamcode.util.roadrunner.MecanumDrive;
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "BLUE_TEST_AUTO_PIXEL", group = "Autonomous")
 public class Autonomous extends LinearOpMode {
     protected Pose2d initialPose;
-    protected Pose2d FarBlueSidePose;
-    protected Pose2d BlueSidePose;
-    protected Pose2d FarRedSidePose;
-    protected Pose2d RedSidePose;
+    protected Pose2d FarBlueSidePose = new Pose2d(0, 56, 0);
+    protected Pose2d BlueSidePose = new Pose2d(28, 56, 0);
+    protected Pose2d FarRedSidePose = new Pose2d(5, -52, 0);
+    protected Pose2d RedSidePose = new Pose2d(-34, -52, 0);
 
 
     @Override
@@ -50,7 +51,7 @@ public class Autonomous extends LinearOpMode {
 
         waitForStart();
 
-        Action trajectoryActionChosen;
+        Action trajectoryActionChosen = null;
         if (initialPose == FarBlueSidePose){
             trajectoryActionChosen = startFromFarBlue;
         } else if (initialPose == BlueSidePose){
@@ -61,6 +62,9 @@ public class Autonomous extends LinearOpMode {
             trajectoryActionChosen = startFromRed;
         }
 
+        if (trajectoryActionChosen != null) {
+            trajectoryActionChosen.run(new TelemetryPacket());
+        }
 
     }
 }

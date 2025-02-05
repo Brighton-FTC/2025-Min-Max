@@ -9,7 +9,9 @@ import org.firstinspires.ftc.teamcode.util.roadrunner.MecanumDrive;
 public class RedSideAudience extends Autonomous{
 
     //initialise Pose
-    protected Pose2d RedSidePose = new Pose2d(-34, -52, 0);
+    public RedSideAudience() {
+        initialPose = RedSidePose;
+    }
 
     MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
