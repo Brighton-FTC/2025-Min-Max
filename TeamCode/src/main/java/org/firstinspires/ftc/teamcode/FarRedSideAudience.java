@@ -1,17 +1,16 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
-import com.acmerobotics.roadrunner.Vector2d;
 
-import org.firstinspires.ftc.teamcode.util.roadrunner.MecanumDrive;
 
-public class FarRedSideAudience extends Autonomous{
-    public FarRedSideAudience() {
-        initialPose = FarRedSidePose;
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Far Red Auto", group = "Autonomous")
+public class FarRedSideAudience extends Autonomous {
+    @Override
+    public void runOpMode() {
+        initialPose = new Pose2d(5, -52, 0);
+        basketPose = new Pose2d(-22, 0, -90);
+        parkPose = new Pose2d(-52, -52, 0);
+        tangent = 90;
+        super.runOpMode();
     }
-
-    //initialise Pose
-    MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
-
 }
