@@ -11,8 +11,12 @@ import org.firstinspires.ftc.teamcode.util.roadrunner.MecanumDrive;
 
 @TeleOp
 public class RedTrajectoriesTeleop extends TrajectoriesTeleop {
-    protected Pose2d centerpose = new Pose2d(0, -25, 0);
+    protected Pose2d centerpose;
     protected Pose2d basketpose = new Pose2d(-56, -56, 0);
+
+    public RedTrajectoriesTeleop() {
+        centerpose = new Pose2d(0, -25, 0);
+    }
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -37,7 +41,7 @@ public class RedTrajectoriesTeleop extends TrajectoriesTeleop {
                 isAtCenter = false;
             }
             if(gamepad.wasJustPressed(PSButtons.CIRCLE) && !isAtCenter){
-                Actions .runBlocking(basketToCenter);
+                Actions.runBlocking(basketToCenter);
                 isAtCenter = true;
             }
             sleep(20);
