@@ -10,11 +10,11 @@ import org.firstinspires.ftc.teamcode.util.inputs.PSButtons;
 import org.firstinspires.ftc.teamcode.util.roadrunner.MecanumDrive;
 
 @TeleOp
-public class RedTrajectoriesTeleop extends TrajectoriesTeleop {
+public class BlueTrajectoriesTeleop extends TrajectoriesTeleop {
     protected Pose2d centerpose;
     protected Pose2d basketpose = new Pose2d(-56, -56, 0);
 
-    public RedTrajectoriesTeleop() {
+    public BlueTrajectoriesTeleop() {
         centerpose = new Pose2d(0, -25, 0);
     }
 
