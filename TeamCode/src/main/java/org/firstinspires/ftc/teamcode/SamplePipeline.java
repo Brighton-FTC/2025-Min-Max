@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class SamplePipeline extends OpenCvPipeline {
     public static final double MIN_AREA = 100;
 
-    public static final Size BLUR_SIZE = new Size(5, 5);
+    public static final Size BLUR_SIZE = new Size(7, 7);
 
     private final Scalar lower, upper;
     private List<MatOfPoint> contours = new ArrayList<>();
@@ -51,7 +51,7 @@ public abstract class SamplePipeline extends OpenCvPipeline {
                 .orElse(null);
 
         // discard contour if it is too small
-        if (largestContour.width() * largestContour.height() < MIN_AREA) {
+        if (largestContour != null && largestContour.width() * largestContour.height() < MIN_AREA) {
             largestContour = null;
         }
 
