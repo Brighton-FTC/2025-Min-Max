@@ -6,8 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 @TeleOp
-@Autonomous
-public class OuttakeComponent {
+public class OuttakeComponent{
     private final ServoEx servo;
 
     private boolean componentActivated = false; // Lowercased to match Java conventions
@@ -16,16 +15,16 @@ public class OuttakeComponent {
         servo = new SimpleServo(hardwareMap, servoId, 0, 360);
     }
 
-    public void lift() {
+    public void Activate() {
         if (!componentActivated) {
-            servo.rotateBy(-90);  // Rotate servo to vertical position
+            servo.rotateBy(-180);  // Rotate servo to vertical position
             componentActivated = true; // Update state to activated
         }
     }
 
     public void reset() {
         if (componentActivated) {
-            servo.rotateBy(90);  // Rotate servo back to horizontal position
+            servo.rotateBy(180);  // Rotate servo back to horizontal position
             componentActivated = false; // Update state to deactivated
         }
     }

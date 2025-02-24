@@ -19,11 +19,14 @@ public abstract class Autonomous extends LinearOpMode {
     public int tangent;
 
 
-
-
     @Override
     public void runOpMode() {
         drive = new MecanumDrive(hardwareMap, initialPose);
+
+        LinearSlideComponent linearSlide = new LinearSlideComponent(hardwareMap, "linear_slide_motor");
+
+        OuttakeComponent servo = new OuttakeComponent(hardwareMap, "outtake_servo");
+
 
         Action autonomousAction = drive.actionBuilder(initialPose)
                 .splineTo(new Vector2d(parkPose.position.x, parkPose.position.y), parkPose.heading)
@@ -34,9 +37,9 @@ public abstract class Autonomous extends LinearOpMode {
 
         if (opModeIsActive()) {
             Actions.runBlocking(autonomousAction);
-            up();
-            deposit();
-            reset();
+            linearSlide.up();
+            servo.Activate();
+            linearSlide.down();
 
         }
     }

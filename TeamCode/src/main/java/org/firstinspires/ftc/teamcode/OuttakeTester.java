@@ -21,7 +21,7 @@ public class OuttakeTester extends OpMode {
     public void loop() {
         // Check if button A is pressed to lift
         if (gamepad.getButton(GamepadKeys.Button.A)) {
-            outtake.lift();
+            outtake.Activate();
             telemetry.addData("Outtake Status", "Lifted");
         }
 

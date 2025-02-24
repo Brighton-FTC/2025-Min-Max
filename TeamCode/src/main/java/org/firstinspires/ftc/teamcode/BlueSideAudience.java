@@ -4,8 +4,7 @@ import com.acmerobotics.roadrunner.Pose2d;
 
 
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Blue Auto", group = "Autonomous")
-@Autonomous
-public class BlueSideAudience{
+public class BlueSideAudience extends Autonomous{
     @Override
     public void runOpMode() {
         initialPose = new Pose2d(28, 56, 0);

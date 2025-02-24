@@ -6,7 +6,7 @@ import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-@Autonomous
+
 @Config
 public class LinearSlideComponent{
     private Motor slideMotor;
