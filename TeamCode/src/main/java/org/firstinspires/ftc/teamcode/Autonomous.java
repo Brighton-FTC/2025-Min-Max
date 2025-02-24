@@ -18,6 +18,46 @@ public abstract class Autonomous extends LinearOpMode {
     protected MecanumDrive drive;
     public int tangent;
 
+    private Motor slideMotor;
+
+    private PIDController controller = new PIDController(0, 0, 0);
+    public static double kP = 0, kI = 0, kD = 0;
+
+    public static double UP_POSITION = 100;
+    public static double DOWN_POSITION = 0;
+
+    public LinearSlideComponent(HardwareMap hardwareMap, String motorId){
+        slideMotor = new Motor(hardwareMap, motorId);
+        slideMotor.resetEncoder();
+        slideMotor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+        slideMotor.setRunMode(Motor.RunMode.VelocityControl);
+    }
+
+    /**
+     * Make sure to call every tick.
+     */
+    public void run() {
+        controller.setPID(kP, kI, kD);
+        slideMotor.set(controller.calculate(slideMotor.getCurrentPosition()));
+    }
+
+    public void up() {
+        controller.setSetPoint(UP_POSITION);
+    }
+
+    public void down() {
+        controller.setSetPoint(DOWN_POSITION);
+    }
+
+    public boolean atSetPoint() {
+            return controller.atSetPoint();
+    }
+
+    public Motor getMotor() {
+        return slideMotor;
+    }
+
+
 
     @Override
     public void runOpMode() {
@@ -32,6 +72,7 @@ public abstract class Autonomous extends LinearOpMode {
 
         if (opModeIsActive()) {
             Actions.runBlocking(autonomousAction);
+
         }
     }
 }
