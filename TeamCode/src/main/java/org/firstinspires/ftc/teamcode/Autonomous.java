@@ -26,6 +26,32 @@ public abstract class Autonomous extends LinearOpMode {
     public static double UP_POSITION = 100;
     public static double DOWN_POSITION = 0;
 
+    private final ServoEx servo;
+
+    private boolean componentActivated = false; // Lowercased to match Java conventions
+
+    public OuttakeComponent(HardwareMap hardwareMap, String servoId) {
+        servo = new SimpleServo(hardwareMap, servoId, 0, 360);
+    }
+
+    public void deposit() {
+        if (!componentActivated) {
+            servo.rotateBy(-180);  // Rotate servo to vertical position
+            componentActivated = true; // Update state to activated
+        }
+    }
+
+    public void reset() {
+        if (componentActivated) {
+            servo.rotateBy(180);  // Rotate servo back to horizontal position
+            componentActivated = false; // Update state to deactivated
+        }
+    }
+
+    public boolean isComponentActivated() {
+        return componentActivated; // Allow status checks
+    }
+
     public LinearSlideComponent(HardwareMap hardwareMap, String motorId){
         slideMotor = new Motor(hardwareMap, motorId);
         slideMotor.resetEncoder();
@@ -72,6 +98,9 @@ public abstract class Autonomous extends LinearOpMode {
 
         if (opModeIsActive()) {
             Actions.runBlocking(autonomousAction);
+            up();
+            deposit();
+            reset();
 
         }
     }
