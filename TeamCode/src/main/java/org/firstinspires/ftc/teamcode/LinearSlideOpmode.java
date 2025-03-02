@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
@@ -20,6 +22,7 @@ public class LinearSlideOpmode extends OpMode {
     public void init() {
         linearSlide = new LinearSlideComponent(hardwareMap, "linear_slide_motor");
         gamepad = new GamepadEx(gamepad1);
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
     }
 
     @Override
@@ -35,6 +38,7 @@ public class LinearSlideOpmode extends OpMode {
         linearSlide.run();
 
         telemetry.addData("Position", linearSlide.getMotor().getCurrentPosition());
+        telemetry.addData("Set point", linearSlide.getSetPoint());
         telemetry.addData("At Set-Point", linearSlide.atSetPoint());
     }
 

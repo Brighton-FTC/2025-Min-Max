@@ -10,17 +10,18 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class LinearSlideComponent {
     private Motor slideMotor;
 
-    private PIDController controller = new PIDController(0, 0, 0);
-    public static double kP = 0, kI = 0, kD = 0;
+    private PIDController controller = new PIDController(0.0007, 0, 0);
+    public static double kP = 0.0007, kI = 0, kD = 0;
 
-    public static double UP_POSITION = 100;
-    public static double DOWN_POSITION = 0;
+    public static double UP_POSITION = 4000;
+    public static double DOWN_POSITION = 150;
 
     public LinearSlideComponent(HardwareMap hardwareMap, String motorId){
         slideMotor = new Motor(hardwareMap, motorId);
         slideMotor.resetEncoder();
-        slideMotor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+        // slideMotor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
         slideMotor.setRunMode(Motor.RunMode.VelocityControl);
+        controller.setSetPoint(DOWN_POSITION);
     }
 
     /**
@@ -45,5 +46,9 @@ public class LinearSlideComponent {
 
     public Motor getMotor() {
         return slideMotor;
+    }
+
+    public double getSetPoint() {
+        return controller.getSetPoint();
     }
 }
