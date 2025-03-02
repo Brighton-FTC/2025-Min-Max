@@ -2,46 +2,45 @@ package org.firstinspires.ftc.teamcode;
 
 import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
 public class GrabberComponent {
-    private final ServoEx servo;
+    public static final int TURN_DEGREE = 90;
+
     private final ServoEx leftClaw;
     private final ServoEx rightClaw;
 
-    public boolean grabberComponentActivated;
-    public boolean servoComponentActivated;// Lowercased to match Java conventions
+    private boolean closed;
 
-    public GrabberComponent(HardwareMap hardwareMap, String servoId) {
-        leftClaw = new SimpleServo(hardwareMap, servoId, 225, 180);
-        rightClaw = new SimpleServo(hardwareMap, servoId, 135, 180);
-        servo = new SimpleServo(hardwareMap, servoId, 0, 360);
+    public GrabberComponent(HardwareMap hardwareMap, String leftId, String rightId) {
+        leftClaw = new SimpleServo(hardwareMap, leftId, 0, 360);
+        rightClaw = new SimpleServo(hardwareMap, rightId, 0, 360);
     }
 
     public void grab() {
-        leftClaw.rotateBy(-45);
-        rightClaw.rotateBy(45);
-        grabberComponentActivated = true; // Update state to activated
+        leftClaw.rotateBy(-TURN_DEGREE);
+        rightClaw.rotateBy(TURN_DEGREE);
+        closed = true;
 
     }
 
     public void reset() {
-        leftClaw.rotateBy(45);
-        rightClaw.rotateBy(-45);
-        grabberComponentActivated = false; // Update state to activated
+        leftClaw.rotateBy(TURN_DEGREE);
+        rightClaw.rotateBy(-TURN_DEGREE);
+        closed = false;
 
     }
 
-    public void activateServo(){
-        servo.rotateBy(180);
-        servoComponentActivated = true;
+    public void toggle() {
+        if (closed) {
+            reset();
+        } else {
+            grab();
+        }
     }
 
-    public void resetServo(){
-        servo.rotateBy(-180);
-        servoComponentActivated = false;
+    public boolean isClosed() {
+        return closed;
     }
-
 }

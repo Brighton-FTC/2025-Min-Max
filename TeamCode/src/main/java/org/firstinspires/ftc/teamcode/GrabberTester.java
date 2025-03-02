@@ -9,39 +9,23 @@ import org.firstinspires.ftc.teamcode.util.inputs.PSButtons;
 
 @TeleOp
 public class GrabberTester extends OpMode {
-    private GrabberComponent leftClaw;
-    private GrabberComponent rightClaw;
-    private GrabberComponent servo;
+    private GrabberComponent grabber;
 
-    // Manages the outtake mechanism
-    private GamepadEx gamepad;        // Enhanced gamepad handler
+    private GamepadEx gamepad;
 
     @Override
     public void init() {
-        leftClaw = new GrabberComponent(hardwareMap, "left_Claw");
-        rightClaw = new GrabberComponent(hardwareMap, "right_Claw");
-        servo = new GrabberComponent(hardwareMap, "grabber_servo");
+        grabber = new GrabberComponent(hardwareMap, "left_claw_servo", "right_claw_servo");
         gamepad = new GamepadEx(gamepad1);
-        servo.reset();
-
     }
 
     @Override
     public void loop() {
-        // Check if button A is pressed to lift
-        if (gamepad.getButton(PSButtons.SQUARE) && !servo.grabberComponentActivated) {
-            servo.activateServo();
-            leftClaw.grab();
-            servo.resetServo();
-            telemetry.addData("Grabber Status", "Lowered");
-        }
+        gamepad.readButtons();
 
-        // Check if button B is pressed to reset
-        if (gamepad.getButton(PSButtons.SQUARE) && servo.grabberComponentActivated) {
-            servo.activateServo();
-            rightClaw.reset();
-            servo.resetServo();
-            telemetry.addData("Grabber Status", "Reset");
+        if (gamepad.getButton(PSButtons.SQUARE)) {
+            grabber.toggle();
+            telemetry.addData("Grabber Status", grabber.isClosed() ? "Closed" : "Opened");
         }
 
     }
