@@ -6,12 +6,12 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
 public class GrabberComponent {
-    public static final int TURN_DEGREE = 90;
+    public static final double TURN_AMOUNT = 0.5;
 
     private final ServoEx leftClaw;
     private final ServoEx rightClaw;
 
-    private boolean closed;
+    private boolean closed = true;
 
     public GrabberComponent(HardwareMap hardwareMap, String leftId, String rightId) {
         leftClaw = new SimpleServo(hardwareMap, leftId, 0, 360);
@@ -19,15 +19,15 @@ public class GrabberComponent {
     }
 
     public void grab() {
-        leftClaw.rotateBy(-TURN_DEGREE);
-        rightClaw.rotateBy(TURN_DEGREE);
+        leftClaw.rotateBy(-TURN_AMOUNT);
+        rightClaw.rotateBy(TURN_AMOUNT);
         closed = true;
 
     }
 
     public void reset() {
-        leftClaw.rotateBy(TURN_DEGREE);
-        rightClaw.rotateBy(-TURN_DEGREE);
+        leftClaw.rotateBy(TURN_AMOUNT);
+        rightClaw.rotateBy(-TURN_AMOUNT);
         closed = false;
 
     }

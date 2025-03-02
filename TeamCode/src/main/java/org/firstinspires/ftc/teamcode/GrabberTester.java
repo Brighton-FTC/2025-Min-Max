@@ -23,10 +23,10 @@ public class GrabberTester extends OpMode {
     public void loop() {
         gamepad.readButtons();
 
-        if (gamepad.getButton(PSButtons.SQUARE)) {
+        if (gamepad.wasJustPressed(PSButtons.SQUARE)) {
             grabber.toggle();
-            telemetry.addData("Grabber Status", grabber.isClosed() ? "Closed" : "Opened");
         }
 
+        telemetry.addData("Grabber Status", grabber.isClosed() ? "Closed" : "Opened");
     }
 }
