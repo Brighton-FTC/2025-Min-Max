@@ -10,11 +10,11 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class LinearSlideComponent {
     private Motor slideMotor;
 
-    private PIDController controller = new PIDController(0.0007, 0, 0);
+    private PIDController controller = new PIDController(0, 0, 0);
     public static double kP = 0.0007, kI = 0, kD = 0;
 
     public static double UP_POSITION = 4000;
-    public static double DOWN_POSITION = 150;
+    public static double DOWN_POSITION = 0;
 
     public LinearSlideComponent(HardwareMap hardwareMap, String motorId){
         slideMotor = new Motor(hardwareMap, motorId);
