@@ -17,6 +17,7 @@ public class Teleop extends OpMode {
     public static final double TURN_THRESHOLD = 0.1;
 
     private MecanumDrive drive;
+    private GamepadEx gamepad1Ex, gamepad2Ex;
     private GamepadEx gamepad;
     private IMU imu;
 
@@ -29,7 +30,10 @@ public class Teleop extends OpMode {
 
     @Override
     public void init() {
-        gamepad = new GamepadEx(gamepad1);
+        gamepad1Ex = new GamepadEx(gamepad1);
+        gamepad2Ex = new GamepadEx(gamepad2);
+
+        gamepad = gamepad1Ex;
 
         Motor[] motors = {
                 new Motor(hardwareMap, "front_left_drive"),
@@ -61,7 +65,8 @@ public class Teleop extends OpMode {
 
     @Override
     public void loop() {
-        gamepad.readButtons();
+        gamepad1Ex.readButtons();
+        gamepad2Ex.readButtons();
 
         // grabber
         if (gamepad.wasJustPressed(PSButtons.SQUARE)){
@@ -99,6 +104,14 @@ public class Teleop extends OpMode {
             }
         }
 
+        // gamepad override
+        if (gamepad2Ex.wasJustPressed(GamepadKeys.Button.LEFT_BUMPER) || gamepad2Ex.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)) {
+            gamepad = gamepad == gamepad1Ex ? gamepad2Ex : gamepad1Ex; // switch control
+        }
+
+        telemetry.addData("Control", gamepad == gamepad1Ex ? "Gamepad 1" : "Gamepad 2");
+        telemetry.addLine();
+
         telemetry.addLine(isFieldCentric ? "Driving Field Centric" : "Driving Robot Centric");
         telemetry.addData("Heading", yaw);
         telemetry.addLine();
@@ -109,5 +122,6 @@ public class Teleop extends OpMode {
         telemetry.addLine();
 
         telemetry.addData("Grabber Status", grabber.isClosed() ? "Closed" : "Opened");
+        telemetry.addLine();
     }
 }
