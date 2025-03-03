@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.arcrobotics.ftclib.controller.PController;
 import com.arcrobotics.ftclib.drivebase.MecanumDrive;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
@@ -13,6 +14,7 @@ import org.firstinspires.ftc.teamcode.util.inputs.PSButtons;
 
 @TeleOp(name = "Teleop (use this one", group = "competition")
 public class Teleop extends OpMode {
+    public static final double TURN_THRESHOLD = 0.1;
 
     private MecanumDrive drive;
     private GamepadEx gamepad;
@@ -20,6 +22,10 @@ public class Teleop extends OpMode {
 
     private GrabberComponent grabber;
     private LinearSlideComponent slide;
+
+    private boolean isFieldCentric = true;
+
+    private PController headingController = new PController(-0.025);
 
     @Override
     public void init() {
@@ -57,12 +63,12 @@ public class Teleop extends OpMode {
     public void loop() {
         gamepad.readButtons();
 
-        drive.driveFieldCentric(gamepad.getLeftX(), gamepad.getLeftY(), gamepad.getRightX(), imu.getRobotYawPitchRollAngles().getYaw(), true);
-
+        // grabber
         if (gamepad.wasJustPressed(PSButtons.SQUARE)){
             grabber.toggle();
         }
 
+        // linear slide
         if (gamepad.wasJustPressed(GamepadKeys.Button.DPAD_UP)) {
             slide.up();
         } else if (gamepad.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)) {
@@ -71,6 +77,31 @@ public class Teleop extends OpMode {
 
         slide.run();
 
+        // drivetrain
+        double yaw = imu.getRobotYawPitchRollAngles().getYaw();
+
+        if (gamepad.wasJustPressed(PSButtons.TRIANGLE)) {
+            isFieldCentric = !isFieldCentric;
+        }
+
+        if (Math.abs(gamepad.getRightX()) > TURN_THRESHOLD) {
+            if (isFieldCentric) {
+                drive.driveFieldCentric(gamepad.getLeftX(), gamepad.getLeftY(), gamepad.getRightX(), yaw, true);
+            } else {
+                drive.driveRobotCentric(gamepad.getLeftX(), gamepad.getLeftY(), gamepad.getRightX(), true);
+            }
+            headingController.setSetPoint(yaw);
+        } else {
+            if (isFieldCentric) {
+                drive.driveFieldCentric(gamepad.getLeftX(), gamepad.getLeftY(), headingController.calculate(yaw), yaw, true);
+            } else {
+                drive.driveRobotCentric(gamepad.getLeftX(), gamepad.getLeftY(), headingController.calculate(yaw), true);
+            }
+        }
+
+        telemetry.addLine(isFieldCentric ? "Driving Field Centric" : "Driving Robot Centric");
+        telemetry.addData("Heading", yaw);
+        telemetry.addLine();
 
         telemetry.addData("Slide Position", slide.getMotor().getCurrentPosition());
         telemetry.addData("Slide Set point", slide.getSetPoint());
