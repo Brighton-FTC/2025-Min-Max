@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.teamcode.util.inputs.PSButtons;
 
-@TeleOp(name = "Teleop (use this one", group = "competition")
+@TeleOp(name = "Teleop (use this one)", group = "competition")
 public class Teleop extends OpMode {
     public static final double TURN_THRESHOLD = 0.1;
 
