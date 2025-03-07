@@ -11,29 +11,28 @@ public class GrabberComponent {
     private final ServoEx leftClaw;
     private final ServoEx rightClaw;
 
-    private boolean closed = true;
 
     public GrabberComponent(HardwareMap hardwareMap, String leftId, String rightId) {
         leftClaw = new SimpleServo(hardwareMap, leftId, 0, 360);
         rightClaw = new SimpleServo(hardwareMap, rightId, 0, 360);
+
+        leftClaw.setInverted(true);
     }
 
     public void grab() {
-        leftClaw.rotateBy(-TURN_AMOUNT);
-        rightClaw.rotateBy(TURN_AMOUNT);
-        closed = true;
+        leftClaw.setPosition(0);
+        rightClaw.setPosition(0);
 
     }
 
     public void reset() {
-        leftClaw.rotateBy(TURN_AMOUNT);
-        rightClaw.rotateBy(-TURN_AMOUNT);
-        closed = false;
+        leftClaw.setPosition(TURN_AMOUNT);
+        rightClaw.setPosition(TURN_AMOUNT);
 
     }
 
     public void toggle() {
-        if (closed) {
+        if (leftClaw.getPosition() == 0) {
             reset();
         } else {
             grab();
@@ -41,6 +40,6 @@ public class GrabberComponent {
     }
 
     public boolean isClosed() {
-        return closed;
+        return leftClaw.getPosition() == 0;
     }
 }
